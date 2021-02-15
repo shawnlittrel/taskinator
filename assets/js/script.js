@@ -9,35 +9,43 @@ var taskFormHandler = function (event) {
 
   //package data as an object
   var taskDataObj = {
-      name: taskNameInput,
-      type: taskTypeInput
+    name: taskNameInput,
+    type: taskTypeInput,
+  };
+  //check if input values are empty strings
+  if (!taskNameInput || !taskTypeInput) {
+    alert("Please ensure all fields are complete before submitting.");
+    return false;
   };
 
+  //reset form after submission
+  formEl.reset();
+  
   //send it as argument to createTaskEl
   createTaskEl(taskDataObj);
 };
 
-var createTaskEl = function(taskDataObj){
-    var listItemEl = document.createElement("li");
-    listItemEl.className = "task-item";
-    //create div to hold task info and add to list item
-    var taskInfoEl = document.createElement("div");
-    taskInfoEl.className = "task-info";
-  
-    //give class name
-    taskInfoEl.className = "task-info";
-    //add HTML info to div
-    taskInfoEl.innerHTML =
-      "<h3 class= 'task-name'>" +
-      taskDataObj.name +
-      "</h3><span class='task-type'>" +
-      taskDataObj.type +
-      "</span>";
-  
-    listItemEl.appendChild(taskInfoEl);
-  
-    //add entire list item to list
-    tasksToDoEl.appendChild(listItemEl);
-}
+var createTaskEl = function (taskDataObj) {
+  var listItemEl = document.createElement("li");
+  listItemEl.className = "task-item";
+  //create div to hold task info and add to list item
+  var taskInfoEl = document.createElement("div");
+  taskInfoEl.className = "task-info";
+
+  //give class name
+  taskInfoEl.className = "task-info";
+  //add HTML info to div
+  taskInfoEl.innerHTML =
+    "<h3 class= 'task-name'>" +
+    taskDataObj.name +
+    "</h3><span class='task-type'>" +
+    taskDataObj.type +
+    "</span>";
+
+  listItemEl.appendChild(taskInfoEl);
+
+  //add entire list item to list
+  tasksToDoEl.appendChild(listItemEl);
+};
 
 formEl.addEventListener("submit", taskFormHandler);
